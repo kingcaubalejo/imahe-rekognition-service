@@ -12,8 +12,6 @@ func Response(data interface{}, responseStatus int, w http.ResponseWriter) {
 		panic(err.Error())
 	}
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	w.WriteHeader(responseStatus)
 	ErrorChecker(w.Write(jData))
 }
