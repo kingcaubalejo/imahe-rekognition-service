@@ -1,0 +1,17 @@
+FROM golang:1.19-buster as builder
+
+WORKDIR /app
+COPY go.* ./
+RUN go mod download
+
+COPY . ./
+
+RUN go build -v -o img-rekog.wasm
+
+
+
+FROM scratch
+COPY --from=builder /app/img-rekog.wasm /app/img-rekog.wasm
+
+EXPOSE 8080
+CMD ["/app/img-rekog.wasm"]
